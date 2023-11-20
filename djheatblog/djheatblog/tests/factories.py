@@ -12,6 +12,8 @@ class UserFactory(factory.django.DjangoModelFactory):
     username = "test"
     is_superuser = True
     is_staff = True
+
+
 class PostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Post
@@ -22,3 +24,4 @@ class PostFactory(factory.django.DjangoModelFactory):
     author = factory.SubFactory(UserFactory)
     content = "x"
     status = "published"
+    
