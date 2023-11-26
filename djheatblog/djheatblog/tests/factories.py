@@ -24,4 +24,5 @@ class PostFactory(factory.django.DjangoModelFactory):
     author = factory.SubFactory(UserFactory)
     content = "x"
     status = "published"
+    img_url = "test"
     
