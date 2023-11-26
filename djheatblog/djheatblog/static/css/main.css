@@ -27,4 +27,8 @@ body {
         font-size: 0.9375rem;
         letter-spacing: -0.0px;
     }
+    .infscroll-author,
+    .infscroll-date {
+        font-size: 0.8125rem;
+    }
 }
