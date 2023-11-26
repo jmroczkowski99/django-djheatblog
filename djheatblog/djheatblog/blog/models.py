@@ -19,6 +19,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, editable=False)
     updated_at = models.DateTimeField(auto_now=True, editable=False)
     status = models.CharField(max_length=10, choices=options, default="draft")
+    img_url = models.TextField(blank=True)
 
     class Meta:
         ordering = ("-created_at",)
