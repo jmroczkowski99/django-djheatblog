@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'djheatblog.blog',
     'django_htmx',
+    'taggit',
 ]
 
 MIDDLEWARE = [
@@ -58,6 +59,9 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'builtins': [
+                'djheatblog.blog.templatetags.tag_cloud',
+            ]
         },
     },
 ]
