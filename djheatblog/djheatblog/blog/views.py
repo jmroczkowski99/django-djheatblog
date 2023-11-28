@@ -1,5 +1,5 @@
-from django.shortcuts import render
 from django.views.generic import ListView
+from django.views.generic import DetailView
 
 from .models import Post
 
@@ -14,3 +14,8 @@ class HomeView(ListView):
             return "blog/components/post-list-elements.html"
         return "blog/index.html"
 
+
+class PostView(DetailView):
+    model = Post
+    context_object_name = "single_post"
+    template_name = "blog/single.html"

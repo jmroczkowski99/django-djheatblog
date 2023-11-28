@@ -17,6 +17,7 @@ class UserFactory(factory.django.DjangoModelFactory):
 class PostFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = Post
+        skip_postgeneration_save = True
 
     title = "x"
     subtitle = "x"
@@ -25,4 +26,12 @@ class PostFactory(factory.django.DjangoModelFactory):
     content = "x"
     status = "published"
     img_url = "test"
+
+    @factory.post_generation
+    def tags(self, create, extracted):
+        if not create:
+            return
+
+        if extracted:
+            self.tags.add(*extracted)
     
