@@ -1,6 +1,8 @@
 {% extends "../base/3-col-template.html" %}
 
-{% block content-left %}{% endblock %}
+{% block content-left %}
+{% include "../base/secondary-navbar.html" %}
+{% endblock %}
 
 {% block content-mid %}
 <div>{{single_post.author}}</div>
