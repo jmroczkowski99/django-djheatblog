@@ -14,11 +14,13 @@
 
 <div class="blogger center mx-auto" style="max-width: 683px;">
     <div class="text-muted">{{single_post.author}}</div>
-    <div class="text-muted">{{single_post.updated_at|date:"d M Y"}}</div>
+    <div class="text-muted pb-5">{{single_post.updated_at|date:"d M Y"}}</div>
     <h1 class="fw-bold pb-2">{{single_post.title}}</h1>
     {{single_post.content}}
 </div>
 
 {% endblock %}
 
-{% block content-right %}{% endblock %}
+{% block content-right %}
+{% sidebar_tag_cloud %}
+{% endblock %}
