@@ -1,5 +1,7 @@
 from django.views.generic import ListView
 from django.views.generic import DetailView
+from django.shortcuts import get_object_or_404
+from django.shortcuts import render
 
 from .models import Post
 
@@ -14,8 +16,7 @@ class HomeView(ListView):
             return "blog/components/post-list-elements.html"
         return "blog/index.html"
 
-
-class PostView(DetailView):
-    model = Post
-    context_object_name = "single_post"
-    template_name = "blog/single.html"
+def post_single(request, post):
+    post = get_object_or_404(Post, slug=post, status="published")
+    related = Post.objects.filter(author=post.author)[:5]
+    return render(request, "blog/single.html", {"post": post, "related": related})
