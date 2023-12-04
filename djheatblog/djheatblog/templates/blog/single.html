@@ -12,7 +12,7 @@
     }
 </style>
 
-<div class="blogger center mx-auto" style="max-width: 683px;">
+<div class="blogger mx-auto" style="max-width: 683px;">
     <div class="text-muted">{{post.author}}</div>
     <div class="text-muted pb-5">{{post.updated_at|date:"d M Y"}}</div>
     <h1 class="fw-bold pb-2">{{post.title}}</h1>
@@ -23,4 +23,27 @@
 
 {% block content-right %}
 {% sidebar_tag_cloud %}
+
+<div class="col-12">
+    <div class="pb-3">More from {{post.author}}</div>
+    {% for post in related %}
+    <a class="text-decoration-none" href="{{post.get_absolute_url}}">
+        <div class="card mb-3 border-0 ps-1">
+            <div class="row">
+                <div class="col-9 pe-2">
+                    <span class="text-dark small">{{post.author}}</span>
+                    <h1 class="mb-1 fs-6 p-0 text-dark fw-bold">{{post.title|truncatechars:80}}</h1>
+                </div>
+                <div class="col-3 pt-4">
+                    <img src="{{post.img_url}}" class="img-fluid float-end">
+                </div>
+            </div>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+<div class="border-top pt-4">
+    {% include "../base/footer.html" %}
+</div>
+
 {% endblock %}
