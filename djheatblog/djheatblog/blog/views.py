@@ -1,5 +1,4 @@
 from django.views.generic import ListView
-from django.views.generic import DetailView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
 
@@ -19,4 +18,5 @@ class HomeView(ListView):
 def post_single(request, post):
     post = get_object_or_404(Post, slug=post, status="published")
     related = Post.objects.filter(author=post.author)[:5]
-    return render(request, "blog/single.html", {"post": post, "related": related})
+    latest = Post.objects.latest("updated_at")
+    return render(request, "blog/single.html", {"post": post, "related": related, "latest": latest})
