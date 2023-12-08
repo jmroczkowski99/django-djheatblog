@@ -1,0 +1,19 @@
+<h2>List of posts of the tag "{{ tag }}"</h2>
+
+{% if posts %}
+
+<ul>
+
+{% for post in posts %}
+
+// displays whatever you want about the post
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No post related to that tag yet.</p>
+
+{% endif%}
