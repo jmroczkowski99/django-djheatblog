@@ -40,7 +40,7 @@ def tags(request, tag):
 class SearchResultsView(ListView):
     model = Post
     context_object_name = "search"
-    template_name = "search.html"
+    template_name = "blog/search.html"
 
     def get_queryset(self):
         query = self.request.GET.get("q")
