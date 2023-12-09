@@ -1,6 +1,7 @@
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render
+from django.db.models import Q
 
 from .models import Post
 
@@ -30,6 +31,20 @@ def post_single(request, post):
     related = Post.objects.filter(author=post.author)[:5]
     return render(request, "blog/single.html", {"post": post, "related": related})
 
+
 def tag(request, tag):
     posts = Post.objects.filter(tags__name=tag)
     return render(request, "blog/tag.html", {"tag": tag, "posts": posts})
+
+
+class SearchResultsView(ListView):
+    model = Post
+    context_object_name = "search"
+    template_name = "search.html"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+        object_list = Post.objects.filter(
+            Q(content__icontains=query)
+        )
+        return object_list
