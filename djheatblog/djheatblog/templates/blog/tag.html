@@ -1,19 +1,45 @@
-<h2>List of posts of the tag "{{ tag }}"</h2>
+{% extends "../base/base.html"%}
 
-{% if posts %}
+{% block title %}
+heatblog
+{% endblock %}
 
-<ul>
+{% block template %}
+{% include "../base/navbar.html" %}
 
-{% for post in posts %}
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            {% if posts %}
+            <h2>Posts related to "{{ tag }}"</h2>
+           {% for post in posts %}
+            <a href="{{ post.get_absolute_url }}" class="text-decoration-none">
+            <div class="card border-0 pb-3 pb-sm-5">
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card-body p-0">
+                            <div class="pb-2 text-body infscroll-author">{{post.author}}</div>
+                            <h1 class="mb-1 text-body fw-bold infscroll-title">{{post.title|truncatechars:100}}</h1>
+                            <h2 class="text-muted fs-6 d-none d-sm-block">{{post.subtitle}}</h2>
+                            <div class="text-muted infscroll-date">{{post.updated_at|date:"d M Y"}}</div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <img src="{{post.img_url}}" class="img-fluid float-end">
+                    </div>
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+            {% else %}
+            <h2>Oops, no posts related to "{{ tag }}"</h2>
+            {% endif%}
+        </div>
+        <div class="d-none d-lg-block col-4">
+            {% sidebar_tag_cloud %}
+            {% include "base/footer.html" %}
+        </div>
+    </div>
+</div>
 
-// displays whatever you want about the post
-
-{% endfor %}
-
-</ul>
-
-{% else %}
-
-<p>No post related to that tag yet.</p>
-
-{% endif%}
+{% endblock %}
