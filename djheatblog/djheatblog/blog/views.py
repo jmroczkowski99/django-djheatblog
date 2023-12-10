@@ -48,3 +48,9 @@ class SearchResultsView(ListView):
             Q(content__icontains=query)
         )
         return object_list
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        query = self.request.GET.get("q")
+        context['query'] = query
+        return context
